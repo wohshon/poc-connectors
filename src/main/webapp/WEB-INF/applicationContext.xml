@@ -9,6 +9,9 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
     ">
  
+<!--  <cxf:rsServer id="rsServer" address="http://0.0.0.0:9000/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
+ --> 
+ <!-- for openshift -->
  <cxf:rsServer id="rsServer" address="http://0.0.0.0:9000/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
  <cxf:rsClient id="rsClient" address="http://54.169.32.213/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
  
@@ -24,7 +27,7 @@
         
         <to uri="cxfrs:bean:rsClient?enableCORS=true"/>
         <to uri="log:myLog?showAll=true&amp;multiline=true"/>
-        <!-- <process ref="myProcessor"/>   -->
+        <process ref="myProcessor"/>
         <!--  
         <marshal>
             <json library="Jackson"/>
