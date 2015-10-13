@@ -12,5 +12,7 @@ public class MyProcessor implements Processor {
 	
 	 	String body = exchange.getIn().getBody(String.class);
 	 	exchange.getOut().setBody(body);
+	 	exchange.getOut().setHeader("APIKEY", exchange.getIn().getHeader("APIKEY"));
+	 	
 	}
 }

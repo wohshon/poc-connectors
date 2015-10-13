@@ -14,11 +14,28 @@
  <!-- for openshift -->
  <cxf:rsServer id="rsServer" address="http://0.0.0.0:9000/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
  <cxf:rsClient id="rsClient" address="http://54.169.32.213/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
+<!-- 
+ <cxf:rsServer id="logRsServer" address="http://0.0.0.0:9000/loggingService" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
+ <cxf:rsClient id="logRsClient" address="http://#{systemProperties['loggingServiceHost']}/sc-logger-s3-1.0-SNAPSHOT" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
+ 
+ --> 
+ <cxf:rsServer id="logRsServer" address="http://0.0.0.0:9000/loggingService" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
+ <cxf:rsClient id="logRsClient" address="http://#{systemEnvironment['loggingServiceHost']}/log" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
+ 
  
  <bean id="myProcessor" class="com.redhat.MyProcessor"/>
  
   <!-- The camel route context -->
   <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+   <route id="logging-service-route">
+        <from uri="cxfrs:bean:logRsServer?bindingStyle=SimpleConsumer&amp;enableCORS=true"/>
+        <log message="Calling Backend Client"/>
+        <to uri="log:myLog?showAll=true&amp;multiline=true"/>
+        <to uri="cxfrs:bean:logRsClient?enableCORS=true"/>
+        <to uri="log:myLog?showAll=true&amp;multiline=true"/>
+        <process ref="myProcessor"/>
+   
+   </route>
    <route id="camel-rest-proxy">
   
         <from uri="cxfrs:bean:rsServer?bindingStyle=SimpleConsumer&amp;enableCORS=true"/>
