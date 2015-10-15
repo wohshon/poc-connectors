@@ -12,15 +12,15 @@
 <!--  <cxf:rsServer id="rsServer" address="http://0.0.0.0:9000/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
  --> 
  <!-- for openshift -->
- <cxf:rsServer id="rsServer" address="http://0.0.0.0:9000/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
- <cxf:rsClient id="rsClient" address="http://54.169.32.213/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="false" />
+ <cxf:rsServer id="rsServer" address="http://0.0.0.0:9000/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="true" />
+ <cxf:rsClient id="rsClient" address="http://54.169.32.213/document" serviceClass="com.redhat.Document" loggingFeatureEnabled="true" />
 <!-- 
  <cxf:rsServer id="logRsServer" address="http://0.0.0.0:9000/loggingService" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
  <cxf:rsClient id="logRsClient" address="http://#{systemProperties['loggingServiceHost']}/sc-logger-s3-1.0-SNAPSHOT" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
  
  --> 
- <cxf:rsServer id="logRsServer" address="http://0.0.0.0:9000/loggingService" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
- <cxf:rsClient id="logRsClient" address="http://#{systemEnvironment['loggingServiceHost']}/log" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="false" />
+ <cxf:rsServer id="logRsServer" address="http://0.0.0.0:9000/loggingService" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="true" />
+ <cxf:rsClient id="logRsClient" address="http://#{systemEnvironment['loggingServiceHost']}/log" serviceClass="com.redhat.LoggingService" loggingFeatureEnabled="true" />
  
  
  <bean id="myProcessor" class="com.redhat.MyProcessor"/>
